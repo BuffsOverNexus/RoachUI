@@ -29,7 +29,6 @@ if (!existsSync(envDirectory)) {
 }
 
 //creates the `environment.prod.ts` and `environment.ts` file if it does not exist
-writeFileUsingFS('./src/environments/environment.prod.ts', '');
 writeFileUsingFS('./src/environments/environment.ts', '');
 
 
@@ -37,9 +36,7 @@ writeFileUsingFS('./src/environments/environment.ts', '');
 const isProduction = environment === 'prod';
 
 // choose the correct targetPath based on the environment chosen
-const targetPath = isProduction
-  ? './src/environments/environment.prod.ts'
-  : './src/environments/environment.ts';
+const targetPath = './src/environments/environment.ts';
 
 //actual content to be compiled dynamically and pasted into respective environment files
 const environmentFileContent = `
