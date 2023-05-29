@@ -134,6 +134,3 @@ dist
 
 # Angular
 .angular
-
-environment.prod.ts
-environment.ts

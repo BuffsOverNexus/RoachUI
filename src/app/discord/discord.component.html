@@ -1,0 +1,15 @@
+<app-navigation></app-navigation>
+
+<ng-component *ngIf="!(messages | async)">
+    Loading...
+</ng-component>
+<table>
+    <tr>
+        <th>Message Topic</th>
+        <th>Options...</th>
+    </tr>
+    <tr *ngFor="let message of messages | async">
+        <td>{{message.subject}}</td>
+        <td><a href="/message/{{message.id}}">Edit</a></td>
+    </tr>
+</table>

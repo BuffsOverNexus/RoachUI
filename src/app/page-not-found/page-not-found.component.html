@@ -1,0 +1,22 @@
+
+<app-navigation></app-navigation>
+
+<div class="grid grid-col-1 place-items-center">
+    <div class="">
+        <div class="flex-grow  text-center bg-red-500 rounded-xl justify-center justify-items-center p-4">
+            <div class="text-3xl p-2"><i class="bi-exclamation-circle-fill"></i> Page Not Found</div>
+            <div class="p-2">
+                The page you are attempting to find does not exist or was moved. Please return home and try again!
+                Alternatively, you can Submit a Ticket for help and give us this link:
+            </div>
+            <div class="p-2">
+                <input type="text" class="p-2 rounded w-[90%] text-center font-semibold" disabled [value]="currentUrl" />
+            </div>
+            
+        </div>
+        <div class="p-4 text-center w-[100%]">
+            <a href="/" class="bg-primary p-4 inline-block w-[40%] rounded opacity-90 hover:opacity-100">Return Home</a>
+        </div>
+    </div>
+</div>
+
