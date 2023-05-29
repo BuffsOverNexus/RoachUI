@@ -24,6 +24,6 @@ export class LoginComponent implements OnInit{
         this.state = state;
       }
 
-      this.url = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fauth&response_type=code&scope=identify%20email&state=" + state;
+      this.url = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=https%3A%2F%2Froach-dev.buffsovernexus.com%2Fauth&response_type=code&scope=identify%20email&state=" + state;
   }
 }

@@ -85,7 +85,6 @@ export class SelectDiscordComponent {
 
     if (this.selectedDiscord) {
       this.discordChannels.subscribe(discordChannels => {
-        console.log("Got here");
         discordChannels.filter(discordChannel => discordChannel.id == this.selectedChannelId).forEach(channel => {
           // Add the Discord to the API.
           const userId = this.authService.getUserId();
