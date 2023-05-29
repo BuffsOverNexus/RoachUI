@@ -6,18 +6,23 @@ export enum BotUrls {
 }
 
 export function getBotUrl() {
-    if (isDevMode())
-        return BotUrls.DEVELOPMENT
-    else
-        return BotUrls.PRODUCTION
+    // if (isDevMode())
+    //     return BotUrls.DEVELOPMENT
+    // else
+    //     return BotUrls.PRODUCTION
+    return BotUrls.DEVELOPMENT;
 }
 
 export function getAuthPath() {
-    if (isDevMode()) {
+    if (isDevMode())
         return AuthPaths.LOCAL;
-    } else {
-        return AuthPaths.PRODUCTION;
-    }
+    else
+        return AuthPaths.DEVELOPMENT;
+    // if (isDevMode()) {
+    //     return AuthPaths.DEVELOPMENT;
+    // } else {
+    //     return AuthPaths.PRODUCTION;
+    // }
 }
 
 export enum BotPaths {

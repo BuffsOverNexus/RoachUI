@@ -35,10 +35,6 @@ export class AuthComponent implements OnInit {
             const receivedState = param['state'];
             const code = param['code'];
 
-            console.log(receivedState);
-            console.log(code);
-
-            console.log(getBotUrl());
             // Validate that the state values match, otherwise they are trying to inject :(
             if (receivedState !== state) throw new Error("State value does not match. Good try though!");
 
