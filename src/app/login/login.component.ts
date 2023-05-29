@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { getAuthUrl } from '../boturls';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,10 @@ export class LoginComponent implements OnInit{
       if (!state) {
         const updatedState = this.authService.generateState();
         this.state = updatedState;
-        this.url = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=https%3A%2F%2Froach-dev.buffsovernexus.com%2Fauth&response_type=code&scope=identify%20email&state=" + this.state;
+        this.url = getAuthUrl() + this.state;
       } else {
         this.state = state;
-        this.url = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=https%3A%2F%2Froach-dev.buffsovernexus.com%2Fauth&response_type=code&scope=identify%20email&state=" + this.state;
+        this.url = getAuthUrl() + this.state;
       }
 
   }
