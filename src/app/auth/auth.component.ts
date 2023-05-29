@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoachUser } from '../models/roach-user';
-import { RoachPaths, getBotUrl } from '../boturls';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../user.service';
-import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,9 +10,9 @@ import { catchError, throwError } from 'rxjs';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router, private httpClient: HttpClient, private userService: UserService) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router, private userService: UserService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): any {
       // Determine if a state value has been stored
       const state = localStorage.getItem("state");
 
