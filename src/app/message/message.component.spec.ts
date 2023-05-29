@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiscordComponent } from './discord.component';
+import { MessageComponent } from './message.component';
 
-describe('DiscordComponent', () => {
-  let component: DiscordComponent;
-  let fixture: ComponentFixture<DiscordComponent>;
+describe('MessageComponent', () => {
+  let component: MessageComponent;
+  let fixture: ComponentFixture<MessageComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DiscordComponent]
+      declarations: [MessageComponent]
     });
-    fixture = TestBed.createComponent(DiscordComponent);
+    fixture = TestBed.createComponent(MessageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

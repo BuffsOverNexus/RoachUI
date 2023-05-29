@@ -11,12 +11,12 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LogoutComponent } from './logout/logout.component';
-import { DiscordComponent } from './discord/discord.component';
 import { SelectDiscordComponent } from './select-discord/select-discord.component';
 import { AccountComponent } from './account/account.component';
 import { DatePipe } from '@angular/common';
 import { LoadingComponent } from './loading/loading.component';
 import { SetupComponent } from './setup/setup.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +26,12 @@ import { SetupComponent } from './setup/setup.component';
     LoginComponent,
     NavigationComponent,
     LogoutComponent,
-    DiscordComponent,
     SelectDiscordComponent,
     AccountComponent,
     PageNotFoundComponent,
     LoadingComponent,
     SetupComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,10 +42,10 @@ import { SetupComponent } from './setup/setup.component';
       {path: 'login', component: LoginComponent},
       {path: 'auth', component: AuthComponent},
       {path: 'logout', component: LogoutComponent},
-      {path: 'discord/:discordId', component: DiscordComponent},
       {path: 'discords', component: SelectDiscordComponent},
       {path: 'account', component: AccountComponent},
       {path: 'setup', component: SetupComponent},
+      {path: 'message/:discordId', component: MessageComponent},
       {path: '**', component: PageNotFoundComponent},
       
     ]),

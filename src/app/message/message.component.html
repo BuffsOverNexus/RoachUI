@@ -1,0 +1,19 @@
+<app-navigation></app-navigation>
+
+<div *ngIf="discord | async as discord">
+    <a href="discords">Select A Discord</a> > <a [href]="'message/'+discord.rawId">{{ discord.name }}</a>
+</div>
+<div class="text-3xl text-center" *ngIf="discord | async as discord"> 
+    {{ discord.name }}
+</div>
+<div *ngIf="messages | async as messages; else loading">
+    <div *ngIf="messages.length == 0">
+        Messages Need Creating
+    </div>
+    <div *ngIf="messages.length > 0">
+        Messages Exist
+    </div>
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

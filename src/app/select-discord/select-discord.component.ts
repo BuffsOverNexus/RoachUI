@@ -60,7 +60,7 @@ export class SelectDiscordComponent {
       if (this.selectedDiscord) {
         if (this.selectedDiscord.exists) {
           // Redirect to the proper page. Otherwise, the page will dynamically tell the user to select a text channel.
-          this.router.navigate(['discord', this.selectedDiscordId]);
+          this.router.navigate(['message', this.selectedDiscordId]);
         } else {
           // Grab the latest channels
           this.discordChannels = this.discordService.getChannelsInDiscord(this.selectedDiscord.id);
@@ -93,7 +93,7 @@ export class SelectDiscordComponent {
 
           // Wait until the server responds before moving on...
           result.subscribe(r => {
-            this.router.navigate(['discord', this.selectedDiscordId]);
+            this.router.navigate(['message', this.selectedDiscordId]);
           });
         });
       })
