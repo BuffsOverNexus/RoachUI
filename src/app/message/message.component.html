@@ -1,17 +1,53 @@
 <app-navigation></app-navigation>
 
-<div *ngIf="discord | async as discord">
+<div class="ml-[10%]"*ngIf="discord | async as discord">
     <a href="discords">Select A Discord</a> > <a [href]="'message/'+discord.rawId">{{ discord.name }}</a>
 </div>
-<div class="text-3xl text-center" *ngIf="discord | async as discord"> 
+<div class="text-3xl pb-2 text-center" *ngIf="discord | async as discord"> 
     {{ discord.name }}
 </div>
-<div *ngIf="messages | async as messages; else loading">
-    <div *ngIf="messages.length == 0">
-        Messages Need Creating
-    </div>
-    <div *ngIf="messages.length > 0">
-        Messages Exist
+<div class="justify-items-center">
+    <div *ngIf="messages | async as messages; else loading" class="grid grid-cols-1 place-items-center text-xl justify-items-center p-2">
+        <div class="w-[20%] rounded bg-secondary p-4">
+            <div class="text-center text-2xl" *ngIf="!showCreateSubject && messages.length > 0" >Your Categories</div>
+            <div *ngIf="messages.length == 0" class="text-warning border-warning border-2 p-2 font-semibold">You do not have any subjects, create one before you can add role reactions.</div>
+            <div *ngIf="!showCreateSubject && messages.length > 0">
+                <div class="p-2">
+                    <div class="flex flex-row items-center" *ngFor="let message of messages">
+                        <div class="basis-3/4 items-center">
+                            <input type="text" class="w-[100%] rounded p-2" disabled readonly [value]="message.subject" />
+                        </div>
+                        <div class="basis-1/4 text-center">
+                            <div class="inline-block pl-2">
+                                <button (click)="view(message)"class="p-2 bg-info w-16 rounded opacity-90 hover:opacity-100"><i class="bi-gear"></i></button>
+                            </div>
+                            <div class="inline-block p-2 text-right">
+                                <button (click)="delete(message)" class="p-2 bg-danger w-16 rounded opacity-90 hover:opacity-100"><i class="bi-trash3"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="text-center text-2xl pb-2" *ngIf="showCreateSubject || messages.length == 0">
+                    <span>New Category</span>
+                </div>
+                <div *ngIf="!showCreateSubject && messages.length > 0" class="p-2">
+                    <button (click)="toggleCreateSubject()" class="bg-success w-[100%] p-3 rounded opacity-90 hover:opacity-100"><i class="bi-plus-circle"></i> New Category</button>
+                </div>
+                <div *ngIf="messages.length == 0 || showCreateSubject" class="p-2">
+                    <div class="inline-block pr-3 w-[80%]">
+                        <input type="text" class="p-2 rounded text-background w-[100%]" [(ngModel)]="subject" placeholder="Subject Name" />
+                    </div>
+                    <div class="inline-block text-right w-[20%]">
+                        <button type="button" class="p-2 w-[100%] rounded bg-success opacity-90 hover:opacity-100" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
+                    </div>
+                </div>
+                <div *ngIf="showCreateSubject && messages.length > 0" class="p-2">
+                    <button (click)="toggleCreateSubject()" class="bg-danger w-[100%] p-3 rounded opacity-90 hover:opacity-100"><i class="bi-x-circle"></i> Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <ng-template #loading>

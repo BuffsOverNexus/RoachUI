@@ -44,4 +44,13 @@ export class MessageService {
     };
     return this.httpClient.post<string>(getBotUrl() + RoachPaths.MESSAGE + "/regenerate", data);
   }
+
+  /**
+   * Delete a Message (aka Category) from backend
+   * @param messageId - The roach id of the message to delete
+   * @returns - Determine if the message was deleted or not.
+   */
+  deleteMessage(messageId: string) {
+    return this.httpClient.delete<boolean>(getBotUrl() + RoachPaths.MESSAGE, { params: { messageId: messageId }});
+  }
 }

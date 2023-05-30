@@ -19,7 +19,7 @@ module.exports = {
         danger: "#FF0000",
         warning: "#E66C2C",
         success: "#2DA51A",
-        info: "#ADD8E6",
+        info: "#0096FF",
         discord: "#7289DA"
       }
     },

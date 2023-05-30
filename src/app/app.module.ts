@@ -17,6 +17,7 @@ import { DatePipe } from '@angular/common';
 import { LoadingComponent } from './loading/loading.component';
 import { SetupComponent } from './setup/setup.component';
 import { MessageComponent } from './message/message.component';
+import { ReactionComponent } from './reaction/reaction.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MessageComponent } from './message/message.component';
     LoadingComponent,
     SetupComponent,
     MessageComponent,
+    ReactionComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import { MessageComponent } from './message/message.component';
       {path: 'account', component: AccountComponent},
       {path: 'setup', component: SetupComponent},
       {path: 'message/:discordId', component: MessageComponent},
+      {path: 'reactions/:messageId', component: ReactionComponent},
       {path: '**', component: PageNotFoundComponent},
       
     ]),
