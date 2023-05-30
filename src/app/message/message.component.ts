@@ -42,6 +42,7 @@ export class MessageComponent {
 
   toggleCreateSubject() {
     this.showCreateSubject = !this.showCreateSubject;
+    this.errors = [];
   }
 
   delete(message: RoachMessage) {
@@ -62,31 +63,38 @@ export class MessageComponent {
 
   create() {
     if (this.subject.length < this.MINIMUM_SUBJECT_LENGTH) {
-      this.errors.push(`You must enter in at least ${this.MINIMUM_SUBJECT_LENGTH} characters in your subject.`);
+      const exists = this.errors.includes(`You must enter in at least ${this.MINIMUM_SUBJECT_LENGTH} characters in your subject.`);
+      
+      if (!exists)
+        this.errors.push(`You must enter in at least ${this.MINIMUM_SUBJECT_LENGTH} characters in your subject.`);
       return;
     }
 
     if (!this.discordId) {
-      this.errors.push(`An error has occurred. Please click 'Role Reactions' and try again.`);
+      const exists = this.errors.includes(`An error has occurred. Please click 'Role Reactions' and try again.`);
+
+      if (!exists)
+        this.errors.push(`An error has occurred. Please click 'Role Reactions' and try again.`);
       return;
     }
-
-    // Hide the form and errors.
-    this.showCreateSubject = false;
-    this.errors = [];
 
     // Determine if the subject already exists.
     if (this.messages) {
       this.messages.subscribe(message => {
         const exists = message.filter(m => m.subject.toUpperCase() === this.subject.toUpperCase()).length > 0;
         if (exists) {
-          this.errors.push("The subject you entered already exists.");
+          const errorExists = this.errors.includes("The subject you entered already exists.");
+          if (!errorExists)
+            this.errors.push("The subject you entered already exists.");
         } else {
           // Doesn't exist, so add it.
           this.messageService.createMessage(this.discordId!, this.subject).subscribe(createdMessage => {
             if (createdMessage) {
               // Update the messages
               this.messages = this.messageService.getMessagesByRawGuildId(this.discordId!);
+              // Hide the form and errors.
+              this.showCreateSubject = false;
+              this.errors = [];
             }
           });
         }
@@ -97,6 +105,9 @@ export class MessageComponent {
         if (createdMessage) {
           // Update messages
           this.messages = this.messageService.getMessagesByRawGuildId(this.discordId!);
+          // Hide the form and errors.
+          this.showCreateSubject = false;
+          this.errors = [];
         }
       });
     }

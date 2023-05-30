@@ -9,9 +9,19 @@
 <div class="justify-items-center">
     <div *ngIf="messages | async as messages; else loading" class="grid grid-cols-1 place-items-center text-xl justify-items-center p-2">
         <div class="w-[20%] rounded bg-secondary p-4">
-            <div class="text-center text-2xl" *ngIf="!showCreateSubject && messages.length > 0" >Your Categories</div>
-            <div *ngIf="messages.length == 0" class="text-warning border-warning border-2 p-2 font-semibold">You do not have any subjects, create one before you can add role reactions.</div>
-            <div *ngIf="!showCreateSubject && messages.length > 0">
+            <div class="text-danger border-2 border-danger p-2" *ngIf="errors.length > 0">
+                <div *ngFor="let error of errors"><i class="bi-exclamation-circle"></i> {{ error }}</div>
+            </div>
+            <div class="text-center " *ngIf="!showCreateSubject && messages.length > 0">
+                <div class="text-2xl pb-2">Your Categories</div>
+                <div class="text-sm p-2 text-accent text-left">
+                    Categories are used to divide up your different role reactions. 
+                    This way you can have many different uses for Roach.
+                    <span class="italic block pt-2">Examples: <span class="font-bold">Games</span> for selecting games, <span class="font-bold">Schedule</span> for days of the week.</span>
+                </div>
+            </div>
+            <div *ngIf="messages.length == 0" class="text-warning border-warning rounded border-2 p-2"><i class="bi-exclamation-circle"></i> You do not have any categories.</div>
+            <div *ngIf="!showCreateSubject && messages.length > 0" class="pt-2">
                 <div class="p-2">
                     <div class="flex flex-row items-center" *ngFor="let message of messages">
                         <div class="basis-3/4 items-center">
@@ -28,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="pt-2">
                 <div class="text-center text-2xl pb-2" *ngIf="showCreateSubject || messages.length == 0">
                     <span>New Category</span>
                 </div>
@@ -40,12 +50,17 @@
                         <input type="text" class="p-2 rounded text-background w-[100%]" [(ngModel)]="subject" placeholder="Subject Name" />
                     </div>
                 </div>
-                <div *ngIf="messages.length == 0 || showCreateSubject" class="p-2">
+                <div *ngIf="messages.length > 0 && showCreateSubject" class="p-2">
                     <div class="inline-block pr-1 w-[50%]">
                         <button type="button" class="p-2 w-[100%] inline-block rounded bg-success opacity-90 hover:opacity-100" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
                     </div>
                     <div class="inline-block pl-1 w-[50%]">
                         <button (click)="toggleCreateSubject()" class="bg-danger w-[100%] p-2 rounded opacity-90 hover:opacity-100"><i class="bi-x-circle"></i> Cancel</button>
+                    </div>
+                </div>
+                <div *ngIf="messages.length == 0" class="p-2">
+                    <div class="inline-block pr-1 w-[100%]">
+                        <button type="button" class="p-2 w-[100%] inline-block rounded bg-success opacity-90 hover:opacity-100" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
                     </div>
                 </div>
             </div>
