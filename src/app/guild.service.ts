@@ -19,7 +19,7 @@ export class GuildService {
    * @returns - The edited guild that Roach found.
    */
   getDiscordByRawId(rawId: string) {
-    return this.httpClient.get<RoachGuild>(getBotUrl() + RoachPaths.GUILD + `/${rawId}`);
+    return this.httpClient.get<RoachGuild>(getBotUrl() + RoachPaths.GUILD + "/by-raw", { params: { guildId: rawId } });
   }
 
   /**
@@ -28,7 +28,7 @@ export class GuildService {
    * @returns - A list of discords
    */
   getDiscordsByRawUserId(rawId: string) {
-    return this.httpClient.get<RoachGuild>(getBotUrl() + RoachPaths.USER + RoachPaths.GUILD + `/${rawId}`);
+    return this.httpClient.get<RoachGuild>(getBotUrl() + RoachPaths.USER + RoachPaths.GUILD, { params: { guildId: rawId } });
   }
 
 
@@ -53,5 +53,29 @@ export class GuildService {
     return this.httpClient.post<RoachGuild>(getBotUrl() + RoachPaths.GUILD, data);
   }
 
-  // TODO: Add an API endpoint to update channel id. (Reference: Issue #12)
+  /**
+   * Update the Channel within a Guild
+   * @param channelName - The new name of the channel
+   * @param channelId - The channel id
+   * @param rawGuildId - The guild id
+   * @returns - The updated RoachGuild
+   */
+  updateChannel(channelName: string, channelId: string, rawGuildId: string) {
+    const data = {
+      channelName,
+      channelId,
+      guildId: rawGuildId
+    };
+
+    return this.httpClient.patch<RoachGuild>(getBotUrl() + RoachPaths.GUILD + RoachPaths.CHANNEL, data);
+  }
+
+  /**
+   * Get a RoachGuild based on exact id
+   * @param id - The Roach id of a guild
+   * @returns - The existing RoachGuild
+   */
+  getGuildById(id: string) {
+    return this.httpClient.get<RoachGuild>(getBotUrl() + RoachPaths.GUILD + "/by-id", { params: { guildId: id }});
+  }
 }

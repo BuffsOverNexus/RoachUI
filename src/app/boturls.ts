@@ -47,6 +47,7 @@ export enum RoachPaths {
     MESSAGES = "/messages",
     REACTION = "/reaction", // create reaction
     REACTIONS = "/reactions", // needs raw message id
+    CHANNEL = "/channel"
 
 }
 

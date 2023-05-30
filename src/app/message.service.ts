@@ -51,6 +51,6 @@ export class MessageService {
    * @returns - Determine if the message was deleted or not.
    */
   deleteMessage(messageId: string) {
-    return this.httpClient.delete<boolean>(getBotUrl() + RoachPaths.MESSAGE, { params: { messageId: messageId }});
+    return this.httpClient.delete<boolean>(getBotUrl() + RoachPaths.MESSAGE, { params: { id: messageId }});
   }
 }

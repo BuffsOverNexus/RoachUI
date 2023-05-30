@@ -50,6 +50,8 @@ export class MessageComponent {
     this.messageService.deleteMessage(message.id).subscribe(response => {
       if (response) {
         this.success = `Successfully removed ${message.subject}!`;
+        // Update messages
+        this.messages = this.messageService.getMessagesByRawGuildId(this.discordId!);
       } else {
         this.errors.push(`Unable to remove ${message.subject}. Please contact Roach support.`);
       }
