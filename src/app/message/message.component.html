@@ -36,15 +36,17 @@
                     <button (click)="toggleCreateSubject()" class="bg-success w-[100%] p-3 rounded opacity-90 hover:opacity-100"><i class="bi-plus-circle"></i> New Category</button>
                 </div>
                 <div *ngIf="messages.length == 0 || showCreateSubject" class="p-2">
-                    <div class="inline-block pr-3 w-[80%]">
+                    <div class="inline-block w-[100%]">
                         <input type="text" class="p-2 rounded text-background w-[100%]" [(ngModel)]="subject" placeholder="Subject Name" />
                     </div>
-                    <div class="inline-block text-right w-[20%]">
-                        <button type="button" class="p-2 w-[100%] rounded bg-success opacity-90 hover:opacity-100" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
-                    </div>
                 </div>
-                <div *ngIf="showCreateSubject && messages.length > 0" class="p-2">
-                    <button (click)="toggleCreateSubject()" class="bg-danger w-[100%] p-3 rounded opacity-90 hover:opacity-100"><i class="bi-x-circle"></i> Cancel</button>
+                <div *ngIf="messages.length == 0 || showCreateSubject" class="p-2">
+                    <div class="inline-block pr-1 w-[50%]">
+                        <button type="button" class="p-2 w-[100%] inline-block rounded bg-success opacity-90 hover:opacity-100" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
+                    </div>
+                    <div class="inline-block pl-1 w-[50%]">
+                        <button (click)="toggleCreateSubject()" class="bg-danger w-[100%] p-2 rounded opacity-90 hover:opacity-100"><i class="bi-x-circle"></i> Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
