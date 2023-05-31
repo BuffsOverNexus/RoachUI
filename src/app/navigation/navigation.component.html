@@ -1,0 +1,24 @@
+
+<nav class="pb-7">
+    <div class="bg-secondary rounded-bl-md text-xl flex flex-row items-center p-2 h-20">
+        <div class="basis-1/4 inline-block text-3xl font-bold"><a href="/" class="hover:text-primary">Roach UI</a></div>
+        <div class="basis-1/2 text-center">
+            <div class="inline-block pr-12">
+                <a href="setup" class=" inline-block font-semibold hover:text-primary"><i class="bi-robot"></i> Setup Bot</a>
+            </div>
+            <div class="inline-block pr-12">
+                <a href="discords" class=" inline-block font-semibold hover:text-primary"><i class="bi-chat-right-heart"></i> Role Reactions</a>
+            </div>
+            <div class="inline-block pr-12">
+                <a href="contact" class=" inline-block font-semibold hover:text-primary"><i class="bi-envelope"></i> Contact Us</a>
+            </div>
+            <div class="inline-block">
+                <a href="faq" class=" inline-block font-semibold hover:text-primary"><i class="bi-question-circle"></i> FAQ</a>
+            </div>
+        </div>
+        <div class="basis-1/4 text-right">
+            <a href="account" *ngIf="isLoggedIn" class="p-4 hover:text-primary"><img [src]="avatar" class="rounded-full w-10 inline-block" /> {{ name }}</a>
+            <a href="login" *ngIf="!isLoggedIn" class="p-3 hover:text-primary"><i class="bi-person-circle"></i> Login with Discord</a>
+        </div>
+    </div>
+</nav>

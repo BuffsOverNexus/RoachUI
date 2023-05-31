@@ -1,0 +1,24 @@
+<app-navigation></app-navigation>
+<div class="justify-items-center">
+    <div class="grid grid-cols-1 place-items-center text-xl justify-items-center">
+        <div class="flex flex-col bg-secondary p-4 rounded-xl" *ngIf="user | async as user; else loading">
+            <div class="p-3 text-center"><img [src]="avatar" class="h-[30%] rounded-full inline-block align-text-bottom w-36" /></div>
+            <div class="p-3 text-center"><span class="text-3xl">{{ name }}</span></div>
+            <div class="p-3">
+                <label for="userid" class="inline-block w-36">Roach ID: </label><input type="text" class="rounded text-center p-2" id="userid" disabled [(ngModel)]="user.id"/>
+            </div>
+            <div class="p-3">
+                <label for="lastLogin" class="inline-block w-36">Last Login: </label><input type="text" class="rounded text-center p-2" id="lastLogin" disabled [value]="convertToReadableDate(user.lastLogin)"/>
+            </div>
+            <div class="p-3">
+                <a href="logout" *ngIf="isLoggedIn" class="p-3 text-center opacity-[80%] hover:opacity-100 bg-warning border-warning  w-[100%] inline-block text-white rounded-xl "><i class="bi-person-x"></i> Logout</a>
+            </div>
+            <div class="p-3">
+                <a href="delete" *ngIf="isLoggedIn" class="p-3 text-center opacity-[80%] hover:opacity-100 bg-danger border-danger  w-[100%] inline-block text-white rounded-xl"><i class="bi-person-x"></i> Delete Account</a>
+            </div>
+        </div>
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
+    </div>
+</div>

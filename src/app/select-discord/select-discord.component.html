@@ -1,0 +1,34 @@
+<app-navigation></app-navigation>
+<div class="grid grid-cols-1 place-items-center" *ngIf="discordGuilds | async else loading">
+    <div class="text-3xl pb-5">Discord Selection</div>
+    <div class="text-xl pb-5" *ngIf="errors.length > 0">
+        <div class="text-danger border-2 border-danger p-3">
+            <p *ngFor="let error of errors" class="font-semibold"><i class="bi-exclamation-circle"></i> {{ error }}</p>
+        </div>
+    </div>
+    <div class="pb-5">
+        <div class="italic text-primary border-primary border-2 rounded p-3"><i class="bi-patch-question"></i> Can't find your Discord? Make sure you followed the <a href="setup" class="text-accent hover:underline font-bold"><i class="bi-robot"></i> Setup Bot</a> guide</div>
+    </div>
+    <div class="" *ngIf="!selectedDiscord">
+        <div class="pr-4 inline-block w-[400px]">
+            <select class="text-black p-3 inline-block w-[100%] rounded" [(ngModel)]="selectedDiscordId"  placeholder="Select A Server">
+                <option [value]="discord.id" *ngFor="let discord of discordGuilds | async;">{{ discord.name }}</option>
+                <option value="-1" selected hidden disabled>Select a Discord</option>
+            </select>
+        </div>
+        <div class="rounded inline-block text-white bg-primary opacity-90 hover:opacity-100 cursor-pointer w-36 p-3 text-center" (click)="continue()">Continue</div>
+    </div>
+    <div class="" *ngIf="selectedDiscord && !selectedDiscord.exists">
+        <div class="pb-2 text-xl text-warning">You need to select a Text Channel before you can continue:</div>
+        <div class="pr-4 inline-block w-[400px]">
+            <select class="text-black p-3 inline-block w-[100%] rounded" [(ngModel)]="selectedChannelId" placeholder="Select A Server">
+                <option [value]="channel.id" *ngFor="let channel of discordChannels | async">#{{ channel.name }}</option>
+            </select>
+        </div>
+        <div class="rounded inline-block text-white bg-warning opacity-90 hover:opacity-100 cursor-pointer w-36 p-3 text-center" (click)="register()">Register</div>
+    </div>
+    
+</div>
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

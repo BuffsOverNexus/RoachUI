@@ -1,0 +1,24 @@
+<app-navigation></app-navigation>
+
+<div class="justify-items-center">
+    <div class="grid grid-cols-1 place-items-center justify-items-center">
+        <div class="w-[50%] bg-secondary rounded p-4">
+            <div class="grid grid-cols-1 place-items-center justify-items-center">
+                <div class="text-3xl p-2 text-discord">Access Roach via Discord</div>
+                <div class="p-2 w-[50%]">
+                    To prevent storing any potential harmful user data to our database, we require all users to sign in via Discord. 
+                    We will only store your user identifier from Discord. Everything else associated to you will be in house data that has no meaning outside of Roach.
+                </div>
+                <div  class="p-2"><a class="text-discord border-discord border-2 rounded text-lg p-3 w-48 inline-block text-center hover:bg-discord hover:text-text"
+                    [href]="url"
+                     ><i class="bi-discord"></i> Login</a></div>
+            </div>
+            <ng-template *ngIf="!state">
+                <div class="grid grid-cols-1 place-items-center justify-items-center">
+                    <div class="text-3xl">Loading</div>
+                    <div class="">Please wait while we prepare the page!</div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
