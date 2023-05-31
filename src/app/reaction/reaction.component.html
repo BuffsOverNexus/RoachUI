@@ -9,8 +9,14 @@
             <div class="pb-2 text-center">
                 <div class="text-3xl">Role Reactions</div>
             </div>
-            <div class="pb-2 border-danger border-2 text-danger" *ngIf="errors.length > 0">
-                <div class="p-2" *ngFor="let error of errors">{{ error }}</div>
+            <div class=" border-success border-2 text-success" *ngIf="success.length > 0">
+                <div class="p-2"><i class="bi-check-circle"></i> {{ success }}</div>
+            </div>
+            <div class="border-danger border-2 text-danger" *ngIf="errors.length > 0">
+                <div class="p-2" *ngFor="let error of errors"><i class="bi-exclamation-circle"></i> {{ error }}</div>
+            </div>
+            <div class=" border-warning border-2 text-warning" *ngIf="reactions.length == 0">
+                <div class="p-2"><i class="bi-exclamation-circle"></i> You do not have any role reactions!</div>
             </div>
             <div class="pb-2 flex flex-row" *ngFor="let reaction of reactions">
                 <div class=" p-1">

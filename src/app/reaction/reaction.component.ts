@@ -65,7 +65,7 @@ export class ReactionComponent implements OnInit {
 
             this.emotes.subscribe(emotes => {
               this.emoteList = emotes;
-            })
+            });
           });
         });
 
