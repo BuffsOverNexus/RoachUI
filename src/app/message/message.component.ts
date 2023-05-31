@@ -64,6 +64,7 @@ export class MessageComponent {
   }
 
   create() {
+    
     if (this.subject.length < this.MINIMUM_SUBJECT_LENGTH) {
       const exists = this.errors.includes(`You must enter in at least ${this.MINIMUM_SUBJECT_LENGTH} characters in your subject.`);
       

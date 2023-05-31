@@ -53,4 +53,13 @@ export class MessageService {
   deleteMessage(messageId: string) {
     return this.httpClient.delete<boolean>(getBotUrl() + RoachPaths.MESSAGE, { params: { id: messageId }});
   }
+
+  /**
+   * Gather a specific RoachMessage
+   * @param messageId - The Roach message id
+   * @returns - The RoachMessage or nothing
+   */
+  getMessageById(messageId: string) {
+    return this.httpClient.get<RoachMessage>(getBotUrl() + RoachPaths.MESSAGE, { params: { id: messageId }});
+  }
 }

@@ -32,4 +32,8 @@ export class ReactionService {
     };
     return this.httpClient.post<RoachReaction>(getBotUrl() + RoachPaths.REACTION, data);
   }
+
+  deleteReaction(reactionId: string) {
+    return this.httpClient.delete<RoachReaction>(getBotUrl() + RoachPaths.REACTION, { params: { reactionId } });
+  }
 }

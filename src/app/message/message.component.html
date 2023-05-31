@@ -20,19 +20,23 @@
                     <span class="italic block pt-2">Examples: <span class="font-bold">Games</span> for selecting games, <span class="font-bold">Schedule</span> for days of the week.</span>
                 </div>
             </div>
-            <div *ngIf="messages.length == 0" class="text-warning border-warning rounded border-2 p-2"><i class="bi-exclamation-circle"></i> You do not have any categories.</div>
+            <div *ngIf="messages.length == 0" class="p-2">
+                <div class="text-warning border-warning rounded border-2 p-2">
+                    <i class="bi-exclamation-circle"></i> You do not have any categories.
+                </div>
+            </div>
             <div *ngIf="!showCreateSubject && messages.length > 0" class="pt-2">
                 <div class="p-2">
                     <div class="flex flex-row items-center" *ngFor="let message of messages">
-                        <div class="basis-3/4 items-center">
+                        <div class="basis-2/3 items-center">
                             <input type="text" class="w-[100%] rounded p-2" disabled readonly [value]="message.subject" />
                         </div>
-                        <div class="basis-1/4 text-center">
+                        <div class="basis-1/3 text-center">
                             <div class="inline-block pl-2">
-                                <button (click)="view(message)"class="p-2 bg-info w-16 rounded opacity-90 hover:opacity-100"><i class="bi-gear"></i></button>
+                                <button (click)="view(message)"class="p-2 bg-info rounded w-12 opacity-90 hover:opacity-100"><i class="bi-gear"></i></button>
                             </div>
                             <div class="inline-block p-2 text-right">
-                                <button (click)="delete(message)" class="p-2 bg-danger w-16 rounded opacity-90 hover:opacity-100"><i class="bi-trash3"></i></button>
+                                <button (click)="delete(message)" class="p-2 bg-danger rounded w-12 opacity-90 hover:opacity-100"><i class="bi-trash3"></i></button>
                             </div>
                         </div>
                     </div>
