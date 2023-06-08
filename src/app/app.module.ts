@@ -18,6 +18,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { SetupComponent } from './setup/setup.component';
 import { MessageComponent } from './message/message.component';
 import { ReactionComponent } from './reaction/reaction.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ReactionComponent } from './reaction/reaction.component';
     SetupComponent,
     MessageComponent,
     ReactionComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { ReactionComponent } from './reaction/reaction.component';
       {path: 'setup', component: SetupComponent},
       {path: 'message/:discordId', component: MessageComponent},
       {path: 'reactions/:messageId', component: ReactionComponent},
+      {path: 'admin', component: AdminComponent},
       {path: '**', component: PageNotFoundComponent},
       
     ]),

@@ -15,21 +15,20 @@ export class AuthComponent implements OnInit {
   ngOnInit(): any {
       // Determine if a state value has been stored
       const state = localStorage.getItem("state");
-
+      console.log("Saved State: ", state);
       if (!state) {
         this.authService.generateState();
         // Redirect back to login screen
         this.router.navigateByUrl("login");
         
       } else {
-        // State exists. Attempt to get authorization.
-        const state = localStorage.getItem("state");
-
         if (!state) throw new Error("No state value found.");
         this.route.queryParams.subscribe(param => {
           if (param['code'] && param['state']) {
             const receivedState = param['state'];
             const code = param['code'];
+
+            console.log("Received State: ", receivedState);
 
             // Validate that the state values match, otherwise they are trying to inject :(
             if (receivedState !== state) throw new Error("State value does not match. Good try though!");
@@ -48,12 +47,12 @@ export class AuthComponent implements OnInit {
                         // Update last logged in
                         this.userService.updateLastLogin(userResponse.id).subscribe(updatedUser => {
                           // Once the response is given back, login the user
-                          this.authService.login(userDetailsResponse.rawId, userDetailsResponse.name, userResponse.avatar);
+                          this.authService.login(userDetailsResponse.rawId, userDetailsResponse.name, userResponse.avatar, userDetailsResponse.admin);
                           this.router.navigate(['discords']);
                         });
                       } else {
                         this.userService.createUser(userResponse.id, userResponse.username).subscribe(createUserDetailsResponse => {
-                          this.authService.login(createUserDetailsResponse.rawId, createUserDetailsResponse.name, userResponse.avatar);
+                          this.authService.login(createUserDetailsResponse.rawId, createUserDetailsResponse.name, userResponse.avatar, createUserDetailsResponse.admin);
                           this.router.navigate(['discords']);
                         });
                       }

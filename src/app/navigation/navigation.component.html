@@ -12,8 +12,11 @@
             <div class="inline-block pr-12">
                 <a href="contact" class=" inline-block font-semibold hover:text-primary"><i class="bi-envelope"></i> Contact Us</a>
             </div>
-            <div class="inline-block">
+            <div class="inline-block pr-12">
                 <a href="faq" class=" inline-block font-semibold hover:text-primary"><i class="bi-question-circle"></i> FAQ</a>
+            </div>
+            <div class="inline-block" *ngIf="admin">
+                <a href="admin" class=" inline-block font-semibold hover:text-primary"><i class="bi-person-circle"></i> Admin</a>
             </div>
         </div>
         <div class="basis-1/4 text-right">

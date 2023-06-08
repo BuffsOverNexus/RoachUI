@@ -16,14 +16,16 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
       // Determine if state exists
-      const state = localStorage.getItem("state");
+      const state = sessionStorage.getItem("state");
 
       if (!state) {
         const updatedState = this.authService.generateState();
         this.state = updatedState;
         this.url = getAuthUrl() + this.state;
+        console.log(this.state);
       } else {
         this.state = state;
+        console.log(this.state);
         this.url = getAuthUrl() + this.state;
       }
 

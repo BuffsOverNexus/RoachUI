@@ -14,6 +14,7 @@ export class NavigationComponent {
   name: string = this.authService.getUserName();
   userId: string = this.authService.getUserId();
   avatar: string = this.authService.getAvatarUrl();
+  admin: boolean = this.authService.getAdmin();
 
   isLoggedIn: boolean = this.authService.isLoggedIn();
 
