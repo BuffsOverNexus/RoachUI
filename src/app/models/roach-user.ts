@@ -5,4 +5,5 @@ export interface RoachUser {
     lastLogin: string
     createdAt: string
     name: string
+    admin: boolean
 }
