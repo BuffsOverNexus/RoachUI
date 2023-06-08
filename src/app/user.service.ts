@@ -32,4 +32,14 @@ export class UserService {
     };
     return this.httpClient.post<RoachUser>(getBotUrl() + RoachPaths.USER, data);
   }
+
+  /**
+   * Updates the last login for the user
+   * @param rawId - The user's raw id
+   * @returns - The RoachUser object
+   */
+  updateLastLogin(rawId: string) {
+    return this.httpClient.patch<RoachUser>(getBotUrl() + RoachPaths.USER + `/lastLogin`, {}, { params: { userId: rawId } });
+  }
+
 }

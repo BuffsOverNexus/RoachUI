@@ -45,8 +45,12 @@ export class AuthComponent implements OnInit {
                 try {
                     this.userService.getUserByRawId(userResponse.id).subscribe(userDetailsResponse => {
                       if (userDetailsResponse) {
-                        this.authService.login(userDetailsResponse.rawId, userDetailsResponse.name, userResponse.avatar);
-                        this.router.navigate(['discords']);
+                        // Update last logged in
+                        this.userService.updateLastLogin(userResponse.id).subscribe(updatedUser => {
+                          // Once the response is given back, login the user
+                          this.authService.login(userDetailsResponse.rawId, userDetailsResponse.name, userResponse.avatar);
+                          this.router.navigate(['discords']);
+                        });
                       } else {
                         this.userService.createUser(userResponse.id, userResponse.username).subscribe(createUserDetailsResponse => {
                           this.authService.login(createUserDetailsResponse.rawId, createUserDetailsResponse.name, userResponse.avatar);
