@@ -1,7 +1,9 @@
 <app-navigation></app-navigation>
 
-<div class="ml-[30%]" *ngIf="">
-
+<div class="ml-[30%]" *ngIf="guild | async as discord;">
+        <a href="discords">Select a Discord</a> >
+        <a [href]="'message/'+discord.rawId">{{ discord.name }}</a> >
+        <a *ngIf="message | async as message;" [href]="'reactions/'+message.id">{{ message.subject }}</a>
 </div>
 <div class="justify-items-center" *ngIf="emotes | async as emotes; else loading">
     <div *ngIf="reactions | async as reactions" class="grid grid-cols-1 place-items-center justify-items-center p-2">
