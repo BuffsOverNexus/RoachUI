@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 
-<div class="ml-[10%]"*ngIf="discord | async as discord">
+<div class="ml-[10%]" *ngIf="discord | async as discord">
     <a href="discords">Select A Discord</a> > <a [href]="'message/'+discord.rawId">{{ discord.name }}</a>
 </div>
 <div class="text-3xl pb-2 text-center" *ngIf="discord | async as discord"> 
