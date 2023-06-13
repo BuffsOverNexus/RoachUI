@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
 @Component({
   selector: 'app-auth',
@@ -42,7 +44,15 @@ export class AuthComponent implements OnInit {
               userDiscordResponse.subscribe(userResponse => {
                 // Determine if the user is in our database.
                 try {
-                    this.userService.getUserByRawId(userResponse.id).subscribe(userDetailsResponse => {
+                  this.userService.getUserByRawId(userResponse.id).pipe(
+                    catchError(err => {
+                        this.userService.createUser(userResponse.id, userResponse.username).subscribe(createUserDetailsResponse => {
+                          this.authService.login(createUserDetailsResponse.rawId, createUserDetailsResponse.name, userResponse.avatar, createUserDetailsResponse.admin);
+                          this.router.navigate(['discords']);
+                        });
+                        return err;
+                    }),
+                  ).subscribe(userDetailsResponse => {
                       if (userDetailsResponse) {
                         // Update last logged in
                         this.userService.updateLastLogin(userResponse.id).subscribe(updatedUser => {
