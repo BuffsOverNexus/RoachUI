@@ -44,15 +44,7 @@ export class AuthComponent implements OnInit {
               userDiscordResponse.subscribe(userResponse => {
                 // Determine if the user is in our database.
                 try {
-                  this.userService.getUserByRawId(userResponse.id).pipe(
-                    catchError(err => {
-                        this.userService.createUser(userResponse.id, userResponse.username).subscribe(createUserDetailsResponse => {
-                          this.authService.login(createUserDetailsResponse.rawId, createUserDetailsResponse.name, userResponse.avatar, createUserDetailsResponse.admin);
-                          this.router.navigate(['discords']);
-                        });
-                        return err;
-                    }),
-                  ).subscribe(userDetailsResponse => {
+                  this.userService.getUserByRawId(userResponse.id).subscribe(userDetailsResponse => {
                       if (userDetailsResponse) {
                         // Update last logged in
                         this.userService.updateLastLogin(userResponse.id).subscribe(updatedUser => {
