@@ -5,5 +5,6 @@
             <circle class="loader-svg animate" cx="50" cy="50" r="45"></circle>
         </svg>
     </div>
-    <div class="text-3xl pt-2 text-text">Loading...</div>
+    <div class="text-3xl pt-2 text-text" *ngIf="!label">Loading...</div>
+    <div class="text-3xl pt-2 text-text" *ngIf="label">{{ label }}</div>
 </div>

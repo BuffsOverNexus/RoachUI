@@ -1,8 +1,29 @@
 <app-navigation></app-navigation>
 
-<div class="text-center">
-    <h1 class="text-3xl">Welcome to Open Beta for Roach</h1>
+
+<div class="ml-[20%] mr-[20%] flex flex-col" *ngIf="announcements as announcements; else loading">
+    <div *ngFor="let announcement of announcements" class="pb-2">
+        <div class="bg-secondary rounded p-10">
+            <div class="flex flex-row">
+                <div class="flex-grow p-2 text-3xl font-semibold text-primary">{{ announcement.title }}</div>
+                <div class="flex flex-row text-lg italic text">
+                    <div class="p-2">
+                        <span class="pr-2">Posted By: {{ announcement.user.name }}</span>
+                        <span>({{ convertToReadableDate(announcement.posted) }})</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-2" [innerHTML]="announcement.content"></div>
+        </div>
+    </div>
+    <div *ngIf="announcements.length == 0">
+        <div class="p-2">
+            No Announcements for now!
+        </div>
+    </div>
 </div>
-<div class="ml-[20%]">
-    Roach has officialled enter Open Beta. This means you are able to now add Roach to your Discord and test out the Role Reactions feature. To start off, go to <a href="setup"><i class="bi-robot"></i> Setup Bot</a> for more information.
-</div>
+
+<ng-template #loading>
+    <app-loading label="Gathering Latest Announcements" ></app-loading>
+</ng-template>

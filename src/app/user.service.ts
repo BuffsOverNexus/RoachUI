@@ -42,4 +42,13 @@ export class UserService {
     return this.httpClient.patch<RoachUser>(getBotUrl() + RoachPaths.USER + `/lastLogin`, {}, { params: { userId: rawId } });
   }
 
+  /**
+   * Get an existing user via id
+   * @param id - The user's id (non-raw)
+   * @returns - RoachUser - The user matching
+   */
+  getUserById(id: string) {
+    return this.httpClient.get<RoachUser>(getBotUrl() + RoachPaths.USER, { params: { id } });
+  }
+
 }

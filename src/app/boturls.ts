@@ -1,15 +1,17 @@
 import { isDevMode } from "@angular/core";
 
-export enum BotUrls {
-    DEVELOPMENT = "https://bot-dev.roach.buffsovernexus.com",
-    PRODUCTION = "https://bot.roach.buffsovernexus.com"
-}
-
 export function getBotUrl() {
     if (isDevMode())
         return BotUrls.DEVELOPMENT;
     else
         return BotUrls.PRODUCTION;
+}
+
+export function getRoachApiUrl() {
+    if (isDevMode())
+        return RoachApiUrls.DEVELOPMENT;
+    else
+        return RoachApiUrls.PRODUCTION;
 }
 
 export function getAuthPath() {
@@ -29,6 +31,16 @@ export function getAuthUrl() {
         return AuthUrls.LOCAL;
     else
         return AuthUrls.PRODUCTION;
+}
+
+export enum BotUrls {
+    DEVELOPMENT = "https://bot-dev.roach.buffsovernexus.com",
+    PRODUCTION = "https://bot.roach.buffsovernexus.com"
+}
+
+export enum RoachApiUrls {
+    DEVELOPMENT = "https://dev.api.roach.buffsovernexus.com",
+    PRODUCTION = "https://api.roach.buffsovernexus.com"
 }
 
 export enum BotPaths {
@@ -60,4 +72,9 @@ export enum AuthUrls {
     LOCAL = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=http%3A%2F%2Flocalhost%3A4200%2Fauth&response_type=code&scope=identify%20email&state=",
     DEVELOPMENT = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=https%3A%2F%2Froach-dev.buffsovernexus.com%2Fauth&response_type=code&scope=identify%20email&state=",
     PRODUCTION = "https://discord.com/api/oauth2/authorize?client_id=1105618210545475597&redirect_uri=https%3A%2F%2Froach.buffsovernexus.com%2Fauth&response_type=code&scope=identify%20email&state="
+}
+
+export enum RoachApiPaths {
+    ANNOUNCEMENT = "/announcement",
+    ANNOUNCEMENTS = "/announcements"
 }
