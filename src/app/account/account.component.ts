@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { Observable } from 'rxjs';
 import { RoachUser } from '../models/roach-user';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -12,7 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AccountComponent implements OnInit {
 
-  constructor(private authService: AuthService, private userService: UserService, private datePipe: DatePipe) {}
+  constructor(private authService: AuthService, private userService: UserService, private datePipe: DatePipe, private router: Router) {}
 
   isLoggedIn: boolean = this.authService.isLoggedIn();
 
@@ -23,7 +24,12 @@ export class AccountComponent implements OnInit {
   user: Observable<RoachUser> | undefined;
 
   ngOnInit(): void {
-      this.user = this.userService.getUserByRawId(this.userId);
+    if (!this.isLoggedIn) {
+      this.router.navigate(['login']);
+      return;
+    }
+    
+    this.user = this.userService.getUserByRawId(this.userId);
   }
 
   convertToReadableDate(date: string) {

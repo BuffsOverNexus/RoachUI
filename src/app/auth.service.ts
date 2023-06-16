@@ -55,8 +55,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const userId = localStorage.getItem("userId");
-    const name = localStorage.getItem("name");
+    const userId = sessionStorage.getItem("userId");
+    const name = sessionStorage.getItem("name");
 
     if ( !(userId || name) ) {
       return false;
@@ -70,7 +70,7 @@ export class AuthService {
   }
 
   getUserId() {
-    const userId = localStorage.getItem("userId");
+    const userId = sessionStorage.getItem("userId");
     if (userId)
       return userId;
     else
@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   getUserName() {
-    const name = localStorage.getItem("name");
+    const name = sessionStorage.getItem("name");
     if (name)
       return name;
     else
@@ -86,7 +86,7 @@ export class AuthService {
   }
 
   getAvatar() {
-    const avatar = localStorage.getItem("avatar");
+    const avatar = sessionStorage.getItem("avatar");
     if (avatar)
       return avatar;
     else
@@ -102,17 +102,21 @@ export class AuthService {
     }
   }
 
-  logout() {
-    localStorage.removeItem("state");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("name");
-    localStorage.removeItem("avatar");
+  getAdmin() {
+    const admin = Boolean(sessionStorage.getItem("admin"));
+    return admin;
   }
 
-  login(userId: string, name: string, avatar: string) {
+  logout() {
+    sessionStorage.clear();
+    localStorage.clear();
+  }
+
+  login(userId: string, name: string, avatar: string, admin: boolean) {
     localStorage.removeItem("state");
-    localStorage.setItem("userId", userId);
-    localStorage.setItem("name", name);
-    localStorage.setItem("avatar", avatar);
+    sessionStorage.setItem("userId", userId);
+    sessionStorage.setItem("name", name);
+    sessionStorage.setItem("avatar", avatar);
+    sessionStorage.setItem("admin", admin.toString());
   }
 }

@@ -12,7 +12,7 @@
     <div class="" *ngIf="!selectedDiscord">
         <div class="pr-4 inline-block w-[400px]">
             <select class="text-black p-3 inline-block w-[100%] rounded" [(ngModel)]="selectedDiscordId"  placeholder="Select A Server">
-                <option [value]="discord.id" *ngFor="let discord of discordGuilds | async;">{{ discord.name }}</option>
+                <option [value]="discord.id" *ngFor="let discord of discordGuilds | async;">{{ discord.owner ? 'Owner' : 'Admin'}} - {{ discord.name }}</option>
                 <option value="-1" selected hidden disabled>Select a Discord</option>
             </select>
         </div>

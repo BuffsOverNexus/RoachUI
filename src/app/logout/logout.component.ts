@@ -12,12 +12,8 @@ export class LogoutComponent implements OnInit{
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-      // Log the person out
-      if (localStorage.getItem("userId")) {
-        // Auth service handles logging out
-        this.authService.logout();
-      }
+    this.authService.logout();
 
-      this.router.navigateByUrl("login");
+    this.router.navigateByUrl("login");
   }
 }

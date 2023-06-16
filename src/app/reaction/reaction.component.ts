@@ -97,6 +97,7 @@ export class ReactionComponent implements OnInit {
 
   save() {
     this.errors = [];
+    this.success = "";
     if (this.selectedEmote) {
       if (this.selectedRole.length > 0) {
         this.guild?.subscribe(guild => {
@@ -105,8 +106,11 @@ export class ReactionComponent implements OnInit {
               if (role.id == this.selectedRole) {
                 this.reactionService.createReactionById(this.messageId!, guild.rawId, this.selectedEmote!.id, this.selectedRole, role.name).subscribe(response => {
                   this.toggleEmoteMenu();
+                  this.selectedEmote = undefined;
+                  this.selectedRole = "-1";
                   // Update reactions
                   this.reactions = this.reactionService.getReactionsByMessage(this.messageId!);
+                  this.success = "Successfully created role reaction!";
                 });
               }
             })
@@ -120,6 +124,8 @@ export class ReactionComponent implements OnInit {
   }
 
   publish() {
+    this.success = "";
+    this.errors = [];
     // Determine if there are any role reactions
     if (this.reactions) {
       console.log("Got here");
@@ -148,4 +154,5 @@ export class ReactionComponent implements OnInit {
       this.reactions = this.reactionService.getReactionsByMessage(this.messageId!);
     });
   }
+
 }
