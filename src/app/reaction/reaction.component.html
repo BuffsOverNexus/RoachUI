@@ -1,67 +1,71 @@
 <app-navigation></app-navigation>
 
-<div class="ml-[10%]" *ngIf="guild | async as discord;">
-        <a href="discords">Select a Discord</a> >
-        <a [href]="'message/'+discord.rawId">{{ discord.name }}</a> >
-        <a *ngIf="message | async as message;" [href]="'reactions/'+message.id">{{ message.subject }}</a>
+<div class="ml-[10%] text-lg " *ngIf="guild | async as discord;">
+        <a href="discords" class="hover:text-accent">Select a Discord</a> <i class="bi-chevron-right"></i>
+        <a [href]="'message/'+discord.rawId" class="hover:text-accent">{{ discord.name }}</a> <i class="bi-chevron-right"></i>
+        <a *ngIf="message | async as message;" [href]="'reactions/'+message.id" class="hover:text-accent">{{ message.subject }}</a>
 </div>
 <div class="justify-items-center" *ngIf="emotes | async as emotes; else loading">
-    <div *ngIf="reactions | async as reactions" class="grid grid-cols-1 place-items-center justify-items-center p-2">
-        <div class="w-[30%] bg-secondary rounded-t p-4">
-            <div class="pb-2 text-center">
-                <div class="text-3xl">Role Reactions</div>
-            </div>
-            <div class=" border-success border-2 text-success" *ngIf="success.length > 0">
-                <div class="p-2"><i class="bi-check-circle"></i> {{ success }}</div>
-            </div>
-            <div class="border-danger border-2 text-danger" *ngIf="errors.length > 0">
-                <div class="p-2" *ngFor="let error of errors"><i class="bi-exclamation-circle"></i> {{ error }}</div>
-            </div>
-            <div class=" border-warning border-2 text-warning" *ngIf="reactions.length == 0">
-                <div class="p-2"><i class="bi-exclamation-circle"></i> You do not have any role reactions!</div>
-            </div>
-            <div class="pb-2 flex flex-row" *ngFor="let reaction of reactions">
-                <div class=" p-1">
-                    <img [src]="getEmoteUrl(reaction.emoteId)" class="rounded w-10 h-10" />
+    <div class="pb-2 text-center" *ngIf="message | async as message;">
+        <div class="text-3xl">{{message.subject}}</div>
+    </div>
+    <div *ngIf="reactions | async as reactions" class="flex flex-row justify-center p-2">
+        <div class="dialog bg-secondary rounded-t p-4">
+            <div class="p-4" >
+                <div class=" border-success border-2 text-success" *ngIf="success.length > 0">
+                    <div class="p-2"><i class="bi-check-circle"></i> {{ success }}</div>
                 </div>
-                <div class="flex-grow p-1">
-                    <input type="text" class="w-[100%] p-2 rounded" disabled [value]="reaction.roleName" />
+                <div class="border-danger border-2 text-danger" *ngIf="errors.length > 0">
+                    <div class="p-2" *ngFor="let error of errors"><i class="bi-exclamation-circle"></i> {{ error }}</div>
                 </div>
-                <div class="w-[10%] p-1">
-                    <button type="button" class="p-2 w-[100%] inline-block text-center bg-danger rounded" (click)="delete(reaction)"><i class="bi-trash"></i></button>
+                <div class=" border-warning border-2 text-warning" *ngIf="reactions.length == 0">
+                    <div class="p-2"><i class="bi-exclamation-circle"></i> You do not have any role reactions!</div>
                 </div>
-            </div>
-            <div class="flex flex-row" *ngIf="reactions.length > 0">
-                <div class="w-[100%] text-center p-2"><button class="w-[100%] p-2 font-semibold text-center bg-discord rounded  opacity-90 hover:opacity-100" type="button" (click)="publish()"><i class="bi-discord"></i> Publish To Discord</button></div>
-            </div>
-        </div>
-        <div class="w-[30%] p-4 rounded-b bg-secondary">
-            <div class="w-[100%] text-center">
-                <div class="text-xl inline-block">Create New Reaction</div>
-            </div>
-            <div class="p-2 flex flex-row w-[100%] items-start text-black">
-                <div class="w-[40%] p-2 items-start h-[100%]">
-                    <select [(ngModel)]="selectedRole" class="w-[100%] p-2 rounded">
-                        <option value="-1" disabled selected>Select Role</option>
-                        <option [value]="role.id" *ngFor="let role of roles | async">{{ role.name }}</option>
-                    </select>
-                </div>
-                <div class="w-[45%] p-2 items-start">
-                    <div>
-                        <button (click)="toggleEmoteMenu()" class="w-[100%] rounded p-2 bg-info text-text opacity-90 hover:opacity-100" click *ngIf="!showChooseEmote"><i class="bi-emoji-sunglasses"></i> Select Emote <i class="bi-caret-right"></i></button>
-                        <button (click)="toggleEmoteMenu()" class="w-[100%] rounded-t p-2 bg-info text-text opacity-90 hover:opacity-100" *ngIf="showChooseEmote"><i class="bi-emoji-sunglasses"></i> Select Emote <i class="bi-caret-down"></i></button>
+                <div class="pb-2 flex flex-row" *ngFor="let reaction of reactions">
+                    <div class=" p-1">
+                        <img [src]="getEmoteUrl(reaction.emoteId)" class="rounded w-10 h-10" />
                     </div>
-                    <div class="gap-1 grid grid-cols-10 place-items-center p-1 bg-background rounded-b text-text" *ngIf="showChooseEmote">
-                        <div class="cursor-pointer" (click)="selectEmote(emote)" *ngFor="let emote of emotes">
-                            <img class="rounded border-2 border-success hover:border-info" [ngClass]="selectedEmote && selectedEmote.id == emote.id ? 'border-success': 'border-transparent'" [src]="emote.image" />
+                    <div class="flex-grow p-1">
+                        <input type="text" class="w-[100%] p-2 rounded" disabled [value]="reaction.roleName" />
+                    </div>
+                    <div class="w-[10%] p-1">
+                        <button type="button" class="p-2 w-[100%] inline-block text-center bg-danger rounded" (click)="delete(reaction)"><i class="bi-trash"></i></button>
+                    </div>
+                </div>
+                <div class="flex flex-row" *ngIf="reactions.length > 0">
+                    <div class="w-[100%] text-center p-2"><button class="w-[100%] p-4 font-semibold text-center text-xl bg-discord rounded  opacity-90 hover:opacity-100" type="button" (click)="publish()"><i class="bi-discord"></i> Publish To Discord</button></div>
+                </div>
+            </div>
+            <div class="p-4" >
+                <div class="w-[100%] text-center">
+                    <div class="text-2xl inline-block ">Create Reaction</div>
+                </div>
+                <div class="p-2 flex flex-row w-[100%] items-start text-black">
+                    <div class="flex-grow pr-1 items-start h-[100%]">
+                        <select [(ngModel)]="selectedRole" class="w-[100%] p-2 rounded">
+                            <option value="-1" disabled selected>Select Role</option>
+                            <option [value]="role.id" *ngFor="let role of roles | async">{{ role.name }}</option>
+                        </select>
+                    </div>
+                    <div class="w-[55%] pl-1 items-start">
+                        <div>
+                            <button (click)="toggleEmoteMenu()" class="w-[100%] rounded p-2 bg-info text-text opacity-90 hover:opacity-100" click *ngIf="!showChooseEmote"><i class="bi-emoji-sunglasses"></i> Select Emote <i class="bi-caret-right"></i></button>
+                            <button (click)="toggleEmoteMenu()" class="w-[100%] rounded-t p-2 bg-info text-text opacity-90 hover:opacity-100" *ngIf="showChooseEmote"><i class="bi-emoji-sunglasses"></i> Select Emote <i class="bi-caret-down"></i></button>
+                        </div>
+                        <div class="gap-1 grid grid-cols-12 place-items-center p-1 bg-background rounded-b text-text" *ngIf="showChooseEmote">
+                            <div class="cursor-pointer" (click)="selectEmote(emote)" *ngFor="let emote of emotes">
+                                <img class="rounded border-2 border-success w-8 h-8 hover:border-info" [ngClass]="selectedEmote && selectedEmote.id == emote.id ? 'border-success': 'border-transparent'" [src]="emote.image" />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-[15%] p-2">
+                <div class="p-1">
                     <button class="w-[100%] p-2 text-center text-text bg-success rounded opacity-90 hover:opacity-100" type="button" (click)="save()"><i class="bi-save"></i> Save</button>
                 </div>
             </div>
         </div>
+
+        
     </div>
 </div>
 <ng-template #loading>

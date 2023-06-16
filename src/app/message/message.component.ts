@@ -5,6 +5,9 @@ import { GuildService } from '../guild.service';
 import { MessageService } from '../message.service';
 import { RoachMessage } from '../models/discord-message';
 import { RoachGuild } from '../models/roach-guild';
+import { DiscordGuild } from '../models/discord_guild';
+import { DiscordService } from '../discord.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-message',
@@ -12,10 +15,11 @@ import { RoachGuild } from '../models/roach-guild';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent {
-  constructor(private route: ActivatedRoute, private guildService: GuildService, private messageService: MessageService, private router: Router) {}
+  constructor(private route: ActivatedRoute, private authService: AuthService, private guildService: GuildService, private messageService: MessageService, private router: Router, private discordService: DiscordService) {}
 
   discordId: string | null = null;
   discord: Observable<RoachGuild> | undefined;
+  discordGuild: DiscordGuild | undefined;
   messages: Observable<RoachMessage[]> | undefined;
   showCreateSubject: boolean = false;
   subject: string = "";
@@ -23,6 +27,7 @@ export class MessageComponent {
   errors: string[] = [];
   success: string = "";
   MINIMUM_SUBJECT_LENGTH: number = 5;
+  description: string = "";
 
   ngOnInit(): void {
     // Load in discordId
@@ -32,6 +37,12 @@ export class MessageComponent {
       if (this.discordId) {
         this.discord = this.guildService.getDiscordByRawId(this.discordId);
         this.messages = this.messageService.getMessagesByRawGuildId(this.discordId);
+        this.discordService.getDiscordsByUser(this.authService.getUserId()).subscribe(discords => {
+          discords.forEach(discordGuild => {
+            if (discordGuild.id === this.discordId)
+              this.discordGuild = discordGuild
+          })
+        });
       } else {
         // Redirect back to previous page.
         this.router.navigate(['discords']);
@@ -115,4 +126,10 @@ export class MessageComponent {
       });
     }
   }
+
+  edit(message: RoachMessage) {
+    
+  }
 }
+
+

@@ -154,4 +154,5 @@ export class ReactionComponent implements OnInit {
       this.reactions = this.reactionService.getReactionsByMessage(this.messageId!);
     });
   }
+
 }

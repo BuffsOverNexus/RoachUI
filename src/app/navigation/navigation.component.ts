@@ -18,5 +18,5 @@ export class NavigationComponent {
 
   isLoggedIn: boolean = this.authService.isLoggedIn();
 
-}
 
+}
