@@ -41,3 +41,24 @@
       stroke-dashoffset: 282.6;
     }
   }
+
+@layer base {
+  h1 {
+      @apply text-2xl;
+  }
+  h2 {
+      @apply text-xl;
+  }
+  h3 {
+      @apply text-lg
+  }
+  a {
+      @apply hover:text-accent
+  }
+  ul {
+      @apply list-disc
+  }
+  ol {
+      @apply list-decimal
+  }
+}
