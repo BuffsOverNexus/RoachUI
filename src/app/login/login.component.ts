@@ -22,10 +22,8 @@ export class LoginComponent implements OnInit{
         const updatedState = this.authService.generateState();
         this.state = updatedState;
         this.url = getAuthUrl() + this.state;
-        console.log(this.state);
       } else {
         this.state = state;
-        console.log(this.state);
         this.url = getAuthUrl() + this.state;
       }
 

@@ -17,7 +17,6 @@ export class AuthComponent implements OnInit {
   ngOnInit(): any {
       // Determine if a state value has been stored
       const state = localStorage.getItem("state");
-      console.log("Saved State: ", state);
       if (!state) {
         this.authService.generateState();
         // Redirect back to login screen
@@ -30,7 +29,6 @@ export class AuthComponent implements OnInit {
             const receivedState = param['state'];
             const code = param['code'];
 
-            console.log("Received State: ", receivedState);
 
             // Validate that the state values match, otherwise they are trying to inject :(
             if (receivedState !== state) throw new Error("State value does not match. Good try though!");

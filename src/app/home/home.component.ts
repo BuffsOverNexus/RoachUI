@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   convertToHtml(text: string): string {
-    return marked(text, {mangle: false}).replace("\\n", "<br />");
+    return marked(text, {mangle: false, headerIds: false}).replace("\\n", "<br />");
   }
 }
 

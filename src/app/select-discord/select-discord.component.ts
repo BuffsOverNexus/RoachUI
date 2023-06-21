@@ -51,7 +51,6 @@ export class SelectDiscordComponent {
 
     // Retrieve the discord guild selected.
     this.discordGuilds?.subscribe(discordGuilds => {
-      console.log(discordGuilds);
       discordGuilds.filter(discordGuild => discordGuild.id === this.selectedDiscordId).forEach(discordGuild => {
         this.selectedDiscord = discordGuild;
       });

@@ -1,0 +1,66 @@
+<div class="flex flex-row justify-center text-3xl">
+    <div class="flex-grow">Announcements</div>
+    <div class="text-lg" *ngIf="!showCreateAnnouncement"><button type="button" class="p-2 rounded opacity-90 hover:opacity-100 bg-success" (click)="toggleCreateAnnouncement()"><i class="bi-plus-circle"></i> Create Announcement</button></div>
+</div>
+<div class="pt-2" *ngIf="savedAnnouncements && announcements.length > 0; else loading">
+    <div class="flex flex-col divide-y divide-accent" *ngIf="!showCreateAnnouncement">
+        <div class="flex flex-row text-center font-semibold text-2xl bg-secondary">
+            <div class="p-2 basis-2/4">
+                Title
+            </div>
+            <div class="p-2 basis-1/6">
+                Posted On
+            </div>
+            <div class="p-2 basis-1/6">
+                Posted By
+            </div>
+            <div class="p-2 flex-grow">
+                Options
+            </div>
+        </div>
+        <div class="flex flex-row text-lg bg-secondary" *ngFor="let announcement of announcements">
+            <div class="p-2 basis-2/4">
+                {{ announcement.title }}
+            </div>
+            <div class="p-2 basis-1/6">
+                {{ announcement.posted }}
+            </div>
+            <div class="p-2 basis-1/6">
+                {{ announcement.user.name }}
+            </div>
+            <div class="p-2 flex-grow text-right">
+                <button type="button" (click)="delete(announcement)" class="w-full p-3 rounded opacity-90 hover:opacity-100 bg-danger font-semibold"><i class="bi-trash"></i> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex flex-col font-semibold" *ngIf="showCreateAnnouncement">
+    <div class="flex flex-col pb-2">
+        <div class="text-xl text-accent">
+            Title
+        </div>
+        <div>
+            <input type="text" class="p-2 text-black rounded w-[100%] font-normal" [(ngModel)]="createdAnnouncement.title" />
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <div class="text-xl text-accent">
+            Content (Write in Markup)
+        </div>
+        <div>
+            <textarea class="h-56 w-[100%] rounded p-2 text-black font-normal" [(ngModel)]="createdAnnouncement.content"></textarea>
+        </div>
+    </div>
+    <div class="flex flex-row">
+        <div class="flex-grow pr-1">
+            <button type="button" class="w-full p-3 rounded opacity-90 hover:opacity-100 bg-success font-semibold" (click)="create()"><i class="bi-plus-circle"></i> Create</button>
+        </div>
+        <div class="flex-grow pl-1">
+            <button type="button" class="w-[100%] p-3 rounded opacity-90 hover:opacity-100 bg-danger" (click)="toggleCreateAnnouncement()"><i class="bi-x-circle"></i> Cancel</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading label="Retrieving All Announcements"></app-loading>
+</ng-template>

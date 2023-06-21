@@ -19,6 +19,9 @@ import { SetupComponent } from './setup/setup.component';
 import { MessageComponent } from './message/message.component';
 import { ReactionComponent } from './reaction/reaction.component';
 import { AdminComponent } from './admin/admin.component';
+import { AdminAnnouncementComponent } from './admin-announcement/admin-announcement.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminDiscordComponent } from './admin-discord/admin-discord.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { AdminComponent } from './admin/admin.component';
     MessageComponent,
     ReactionComponent,
     AdminComponent,
+    AdminAnnouncementComponent,
+    AdminUserComponent,
+    AdminDiscordComponent
   ],
   imports: [
     BrowserModule,
